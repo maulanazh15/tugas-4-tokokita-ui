@@ -1,7 +1,12 @@
-# tokokita
+# Tugas 4 Toko Kita UI
 
-A new Flutter project.
+Nama    : Maulana Zhahran
 
+NIM     : H1D021070
+
+Shift   : E
+
+Hari    : Senin
 ## Getting Started
 
 This project is a starting point for a Flutter application.
