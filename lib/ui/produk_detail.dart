@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tokokita/bloc/produk_bloc.dart';
 import 'package:tokokita/model/produk.dart';
 import 'package:tokokita/ui/produk_form.dart';
+import 'package:tokokita/ui/produk_page.dart';
 import 'package:tokokita/ui/registrasi_page.dart';
 
 class ProdukDetail extends StatefulWidget {
@@ -17,7 +19,7 @@ class _ProdukDetailState extends State<ProdukDetail> {
       appBar: AppBar(
         title: const Text('Detail Produk'),
         actions: const [
-          namaPanggilan(),
+          // namaPanggilan(),
         ],
       ),
       body: Center(
@@ -48,7 +50,9 @@ class _ProdukDetailState extends State<ProdukDetail> {
       children: [
         //Tombol Edit
         OutlinedButton(
-            style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 69, 237, 75))),
+            style: const ButtonStyle(
+                backgroundColor:
+                    MaterialStatePropertyAll(Color.fromARGB(255, 69, 237, 75))),
             onPressed: () {
               Navigator.push(
                   context,
@@ -60,21 +64,27 @@ class _ProdukDetailState extends State<ProdukDetail> {
             child: const Text("EDIT")),
         //Tombol Hapus
         OutlinedButton(
-            style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 237, 57, 57))) 
-            , onPressed: () => confirmHapus(),
+            style: const ButtonStyle(
+                backgroundColor:
+                    MaterialStatePropertyAll(Color.fromARGB(255, 237, 57, 57))),
+            onPressed: () => confirmHapus(widget.produk!),
             child: const Text("DELETE")),
       ],
     );
   }
 
-  void confirmHapus() {
+  void confirmHapus(produk) {
     AlertDialog alertDialog = AlertDialog(
       content: const Text("Yakin ingin menghapus data ini?"),
       actions: [
         //tombol hapus
         OutlinedButton(
           child: const Text("Ya"),
-          onPressed: () {},
+          onPressed: () {
+            ProdukBloc.deleteProduk(id: produk.id).then((value) => {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProdukPage()))
+            });
+          },
         ),
         //tombol batal
         OutlinedButton(
